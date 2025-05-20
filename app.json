@@ -3,6 +3,7 @@
     "name": "mobile-walled",
     "slug": "mobile-walled",
     "version": "1.0.0",
+    "scheme": "mobile-walled",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .btn {
+        @apply bg-[#0061FF] text-white font-bold py-2 px-4 rounded shadow-lg;
+    }
+}

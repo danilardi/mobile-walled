@@ -3,7 +3,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { useEffect, useRef, useState } from "react";
-import { Alert, Button, Platform, Text, View } from "react-native";
+import { Alert, Button, Linking, Platform, Text, View } from "react-native";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -32,8 +32,11 @@ export default function NotificationsExample() {
         });
 
         const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log('Notification response received:', response);
-            Alert.alert('Notification Response', `You tapped on the notification: ${response.notification.request.content.title}`);
+            console.log('Notification response received:', response.notification.request.content);
+            const url = response.notification.request.content.data?.url;
+            if (url) {
+                Linking.openURL(url);
+            }
         });
 
         return () => {
@@ -86,7 +89,7 @@ export default function NotificationsExample() {
     }
 
     const scheduleNotification = async () => {
-        await scheduleNotificationAsync({
+        await Notifications.scheduleNotificationAsync({
             content: {
                 title: "You've got mail! 📬",
                 body: 'Here is the notification body',
